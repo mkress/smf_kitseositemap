@@ -1,9 +1,8 @@
-SEO Sitemap Mod for SMF by http://kress.it
-Simplemachines forum modification
+SEO Sitemap by [url=http://kress.it]kress.it[/url]
 /*******************************************************************************
-* SEO Sitemap &copy 2012, Markus Kress - Kress.IT						       *
+* SEO Sitemap © 2012, Markus Kress - Kress.IT							       *
 ********************************************************************************
-* README																	   *
+* readme.txt																   *
 ********************************************************************************
 * License http://creativecommons.org/licenses/by-sa/3.0/deed.de CC BY-SA	   *
 * Support for this software  http://kress.it and							   *

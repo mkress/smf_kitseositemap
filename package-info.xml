@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+	<id>mkress:SeoSitemap</id>
+	<name>SEO Sitemap</name>
+	<version>2.0</version>
+	<type>modification</type>
+	
+	<install for="2.0 - 2.0.99">
+		<readme parsebbc="true">readme/readme.txt</readme>
+		<require-dir name="default/css" destination="$themedir" />
+		<require-dir name="default/languages" destination="$themedir" />
+		<require-file name="default/KitSitemap.template.php" destination="$themedir" />
+		<require-file name="core/Subs-KitSitemap.php" destination="$sourcedir" />
+		<code>hooks.php</code>
+		<redirect url="?action=kitsitemap" timeout="1000" />
+	</install>
+	
+	<uninstall for="2.0 - 2.0.99">
+		<code>hooks.php</code>
+		<remove-file name="$themedir/css/kitsitemap.css" />
+		<remove-file name="$themedir/KitSitemap.template.php" />
+		<remove-file name="$sourcedir/Subs-KitSitemap.php" />
+		<remove-dir name="$languagedir/KitSitemap.english.php" />
+		<remove-dir name="$languagedir/KitSitemap.german.php" />
+		<redirect url="?action=admin;area=packages;sa=browse" timeout="1000" />
+	</uninstall>
+	
+</package-info>
