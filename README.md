@@ -1,0 +1,2 @@
+smf_kitseositemap
+=================
