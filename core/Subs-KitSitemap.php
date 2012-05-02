@@ -124,7 +124,8 @@ function kit_sitemap_load_theme()
 			}
 		}
 	}
-	elseif ( !isset($_REQUEST['xml']) )
+	// show in board index, message index and topic display page
+	elseif ( !isset($_REQUEST['xml']) && ( !isset($context['current_action']) || !empty($context['current_board']) || !empty($context['current_topic'])) )
 	{
 		// add footer before body-layer
 		$context['template_layers'][] = 'kitsitemap_footer';
