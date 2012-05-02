@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************
-* SEO Sitemap © 2012, Markus Kress - Kress.IT							       *
+* SEO Sitemap ï¿½ 2012, Markus Kress - Kress.IT							       *
 ********************************************************************************
 * hooks.php																	   *
 ********************************************************************************
@@ -22,14 +22,8 @@ $hooks = array(
 	'integrate_load_theme' => 'kit_sitemap_load_theme'
 );
 
-if (!empty($context['uninstalling']))
-	$call = 'remove_integration_function';
-
-else
-	$call = 'add_integration_function';
-
 foreach ($hooks as $hook => $function)
-	$call($hook, $function);
+	remove_integration_function($hook, $function);
 	
 if (SMF == 'SSI')
 	echo 'Database changes are complete! Please wait...';

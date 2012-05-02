@@ -12,12 +12,12 @@
 		<require-dir name="default/languages" destination="$themedir" />
 		<require-file name="default/KitSitemap.template.php" destination="$themedir" />
 		<require-file name="core/Subs-KitSitemap.php" destination="$sourcedir" />
-		<code>hooks.php</code>
+		<code>install.php</code>
 		<redirect url="?action=kitsitemap" timeout="1000" />
 	</install>
 	
 	<uninstall for="2.0 - 2.0.99">
-		<code>hooks.php</code>
+		<code>uninstall.php</code>
 		<remove-file name="$themedir/css/kitsitemap.css" />
 		<remove-file name="$themedir/KitSitemap.template.php" />
 		<remove-file name="$sourcedir/Subs-KitSitemap.php" />
