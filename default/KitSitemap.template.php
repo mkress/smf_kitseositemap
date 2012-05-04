@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************
-* SEO Sitemap © 2012, Markus Kress - Kress.IT							       *
+* SEO Sitemap ï¿½ 2012, Markus Kress - Kress.IT							       *
 ********************************************************************************
 * KitSitemap.template.php													   *
 ********************************************************************************
@@ -11,7 +11,7 @@
 
 function template_kitsitemap_main()
 {
-	global $context, $settings, $options, $txt, $scripturl, $modSettings, $board_info;
+	global $context;
 		
 	// display categories and boards
 	if (!empty($context['categories']))
@@ -39,7 +39,7 @@ function template_kitsitemap_main()
 
 function template_kitsitemap_xml_main()
 {
-	global $context, $settings, $options, $txt, $scripturl, $modSettings, $board_info;
+	global $context;
 		
 	// display categories and boards
 	if (!empty($context['categories']))

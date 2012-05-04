@@ -14,7 +14,7 @@ if (!defined('SMF'))
 	
 function kit_sitemap_load_theme()
 {
-	global $context, $sourcedir, $boards, $boardList, $cat_tree, $scripturl, $board_info, $modSettings, $user_info, $smcFunc, $txt;
+	global $context, $sourcedir, $scripturl, $board_info, $modSettings, $smcFunc, $txt;
 	
 	// load template
 	loadTemplate('KitSitemap');
@@ -51,6 +51,7 @@ function kit_sitemap_load_theme()
 		if ( !empty($board_info['id']) )
 		{
 			$start = (int) $_REQUEST['start'];
+			$context['topics'] = array();
 			if ( $xmlView )
 			{
 				$context['sub_template'] = 'kitsitemap_xml_board';
@@ -60,9 +61,15 @@ function kit_sitemap_load_theme()
 					SELECT
 						t.ID_TOPIC
 					FROM {db_prefix}messages AS m, {db_prefix}topics AS t
-					WHERE m.ID_BOARD = $board_info[id] AND m.ID_MSG = t.ID_FIRST_MSG
+					WHERE m.ID_BOARD = {int:id_board} AND m.ID_MSG = t.ID_FIRST_MSG
 					ORDER BY t.ID_LAST_MSG DESC
-					LIMIT $start,$context[topics_per_page]");
+					LIMIT {int:start}, {int:limit}",
+					array(
+						'id_board' => $board_info['id'],
+						'start' => $start,
+						'limit' => $context['topics_per_page']
+					)
+				);
 				
 				while($row = $smcFunc['db_fetch_assoc']($query))
 				{
@@ -93,14 +100,19 @@ function kit_sitemap_load_theme()
 				}
 				
 				// get topics
-				$context['topics'] = array();
 				$query= $smcFunc['db_query']('', "
 					SELECT
 						m.subject, t.ID_TOPIC, t.num_replies
 					FROM {db_prefix}messages AS m, {db_prefix}topics AS t
-					WHERE m.ID_BOARD = $board_info[id] AND m.ID_MSG = t.ID_FIRST_MSG
+					WHERE m.ID_BOARD = {int:id_board} AND m.ID_MSG = t.ID_FIRST_MSG
 					ORDER BY t.ID_LAST_MSG DESC
-					LIMIT $start,$context[topics_per_page]");
+					LIMIT {int:start}, {int:limit}",
+					array(
+						'id_board' => $board_info['id'],
+						'start' => $start,
+						'limit' => $context['topics_per_page']
+					)
+				);
 				
 				while($row = $smcFunc['db_fetch_assoc']($query))
 				{
