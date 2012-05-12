@@ -13,6 +13,6 @@ global $scripturl;
 $txt['kitsitemap_mainlink_desc'] = 'View full version:';
 $txt['kitsitemap_archive'] = '[Archive]';
 $txt['kitsitemap_mod'] = 'SEO sitemap &amp; XML sitemap';
-$txt['kitsitemap_footer'] = 'Footer links<br /><span class="smalltext">&raquo; <a href="'.$scripturl.'?action=kitsitemap" target="_blank">show sitemap</a>';
+$txt['kitsitemap_footer'] = 'Footer links<br /><span class="smalltext">&raquo; <a href="'.$scripturl.'?action=kitsitemap">show sitemap</a>';
 $txt['kitsitemap_footer_hide'] = 'hide';
 ?>
