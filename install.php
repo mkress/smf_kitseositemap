@@ -19,7 +19,8 @@ if ((SMF == 'SSI') && !$user_info['is_admin'])
 	
 $hooks = array(
 	'integrate_pre_include' => '$sourcedir/Subs-KitSitemap.php',
-	'integrate_load_theme' => 'kit_sitemap_load_theme'
+	'integrate_load_theme' => 'kit_sitemap_load_theme',
+	'integrate_general_mod_settings' => 'kit_sitemap_mod_settings'
 );
 
 foreach ($hooks as $hook => $function)

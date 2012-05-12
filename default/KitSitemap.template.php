@@ -169,27 +169,31 @@ function template_kitsitemap_footer_above()
 
 function template_kitsitemap_footer_below()
 {
-	global $context, $scripturl;
+	global $context, $scripturl, $modSettings;
 	if (!empty($context['categories']))
 	{
 		$count = 1;
 		echo '<div class="sitemap_index centertext">';
 		echo '<a href="' . $scripturl . '?action=kitsitemap">Sitemap</a>&nbsp;';
-		foreach ($context['categories'] as $category)
+		
+		if ( $modSettings['kit_sitemap_footer'] == 1 )
 		{
-			if (!empty($category['boards']))
+			foreach ($context['categories'] as $category)
 			{
-				foreach($category['boards'] as $board)
+				if (!empty($category['boards']))
 				{
-					if ( isset($board['is_redirect']) )
+					foreach($category['boards'] as $board)
 					{
-						if ($board['is_redirect'])
+						if ( isset($board['is_redirect']) )
 						{
-							continue;
+							if ($board['is_redirect'])
+							{
+								continue;
+							}
+							$link = str_replace('?', '?action=kitsitemap&', $board['href']);
+							echo '<a href="' . $link . '">' . $count . '</a>&nbsp;';
+							$count++;
 						}
-						$link = str_replace('?', '?action=kitsitemap&', $board['href']);
-						echo '<a href="' . $link . '">' . $count . '</a>&nbsp;';
-						$count++;
 					}
 				}
 			}

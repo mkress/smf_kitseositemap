@@ -139,8 +139,17 @@ function kit_sitemap_load_theme()
 	// show in board index, message index and topic display page
 	elseif ( !isset($_REQUEST['xml']) && ( !isset($context['current_action']) || !empty($context['current_board']) || !empty($context['current_topic'])) )
 	{
+		// default settings
+		if ( empty($modSettings['kit_sitemap_footer']) )
+		{
+			$modSettings['kit_sitemap_footer'] = 1;
+		}
+
 		// add footer before body-layer
-		$context['template_layers'][] = 'kitsitemap_footer';
+		if (  $modSettings['kit_sitemap_footer'] == 1 || $modSettings['kit_sitemap_footer'] == 2 )
+		{
+			$context['template_layers'][] = 'kitsitemap_footer';
+		}
 	}
 }
 
@@ -149,4 +158,28 @@ function kit_sitemap_actions(&$actionArray)
 {
 	$actionArray['kitsitemap'] = array('Subs-KitSitemap.php');
 }
+
+// mod settings
+function kit_sitemap_mod_settings(&$config_vars)
+{
+	global $context, $modSettings, $txt;
+
+	loadLanguage('KitSitemap');
+	
+	$config_vars[] = '';
+	$config_vars[] = $txt['kitsitemap_mod'];
+
+	// style
+	$config_vars[] = array(
+		'select', 
+		'kit_sitemap_footer', 
+		array(
+			1 => 'Sitemap 1,2,3...',
+			2 => 'Sitemap',
+			3 => $txt['kitsitemap_footer_hide']
+		),
+		$txt['kitsitemap_footer']
+	);
+}
+
 ?>

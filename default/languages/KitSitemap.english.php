@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************
-* SEO Sitemap © 2012, Markus Kress - Kress.IT							       *
+* SEO Sitemap ï¿½ 2012, Markus Kress - Kress.IT							       *
 ********************************************************************************
 * KitSitemap.english.php													   *
 ********************************************************************************
@@ -9,6 +9,10 @@
 * http://custom.simplemachines.org/mods/index.php?mod=3393					   *
 *******************************************************************************/
 
+global $scripturl;
 $txt['kitsitemap_mainlink_desc'] = 'View full version:';
 $txt['kitsitemap_archive'] = '[Archive]';
+$txt['kitsitemap_mod'] = 'SEO sitemap &amp; XML sitemap';
+$txt['kitsitemap_footer'] = 'Footer links<br /><span class="smalltext">&raquo; <a href="'.$scripturl.'?action=kitsitemap" target="_blank">show sitemap</a>';
+$txt['kitsitemap_footer_hide'] = 'hide';
 ?>
