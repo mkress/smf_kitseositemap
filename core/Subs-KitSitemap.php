@@ -14,7 +14,7 @@ if (!defined('SMF'))
 	
 function kit_sitemap_load_theme()
 {
-	global $context, $sourcedir, $scripturl, $board_info, $modSettings, $smcFunc, $txt;
+	global $context, $sourcedir, $scripturl, $settings, $board_info, $modSettings, $smcFunc, $txt;
 	
 	// load template
 	loadTemplate('KitSitemap');
@@ -37,6 +37,8 @@ function kit_sitemap_load_theme()
 		$xmlView = false;
 		if ( isset($_REQUEST['xml']) )
 		{
+			// disable simple portal for xml view
+			$settings['disable_sp'] = true;
 			$context['template_layers'] = array('kitsitemap_xml');
 			$xmlView = true;
 		}
