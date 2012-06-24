@@ -39,28 +39,23 @@ function template_kitsitemap_main()
 
 function template_kitsitemap_xml_main()
 {
-	global $context;
+	global $boards;
 		
+	
+	echo '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 	// display categories and boards
-	if (!empty($context['categories']))
+	if (!empty($boards))
 	{
-		echo '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-		foreach ($context['categories'] as $category)
-		{	
-			if (!empty($category['boards']))
+		foreach($boards as $board)
+		{
+			if ($board['is_redirect'])
 			{
-				foreach($category['boards'] as $board)
-				{
-					if ($board['is_redirect'])
-					{
-						continue;
-					}
-					echo '<sitemap><loc>' . htmlspecialchars($board['href'] . '&action=kitsitemap;xml').'</loc></sitemap>';
-				}
+				continue;
 			}
+			echo '<sitemap><loc>' . htmlspecialchars($board['href']).'</loc></sitemap>';
 		}
-		echo '</sitemapindex>';
 	}
+	echo '</sitemapindex>';
 }
 
 function template_kitsitemap_board()
@@ -83,19 +78,19 @@ function template_kitsitemap_board()
 function template_kitsitemap_xml_board()
 {
 	global $context;
-	
+			
+	echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 	// list topics
 	if (!empty($context['topics']))
 	{
-		echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 		foreach($context['topics'] as $topic)
 		{
 			echo '<url>
 				<loc>'.htmlspecialchars($topic['href']).'</loc>
 			</url>';
 		}
-		echo '</urlset>';
 	}
+	echo '</urlset>';
 }
 
 function template_kitsitemap_above()

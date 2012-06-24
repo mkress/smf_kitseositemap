@@ -14,7 +14,7 @@ if (!defined('SMF'))
 	
 function kit_sitemap_load_theme()
 {
-	global $context, $sourcedir, $scripturl, $settings, $board_info, $modSettings, $smcFunc, $txt;
+	global $context, $sourcedir, $scripturl, $settings, $board_info, $boarddir, $modSettings, $smcFunc, $txt;
 	
 	// load template
 	loadTemplate('KitSitemap');
@@ -130,6 +130,32 @@ function kit_sitemap_load_theme()
 			$context['kit_sitemap_title'] = $txt['kitsitemap_archive'].' ';
 			if ( $xmlView )
 			{
+				// Find all visible boards
+				$request = $smcFunc['db_query']('', '
+					SELECT
+						b.name, b.num_topics, b.num_posts, b.id_board,' . (!$user_info['is_guest'] ? ' 1 AS is_read' : '
+						(IFNULL(lb.id_msg, 0) >= b.id_last_msg) AS is_read') . ',
+						CASE WHEN b.redirect != {string:blank_string} THEN 1 ELSE 0 END AS is_redirect
+					FROM {db_prefix}boards AS b
+						LEFT JOIN {db_prefix}log_boards AS lb ON (lb.id_board = b.id_board AND lb.id_member = {int:current_member})
+					WHERE {query_wanna_see_board}',
+					array(
+						'current_member' => $user_info['id']
+					)
+				);
+				$boards = array();
+				while ($row = $smcFunc['db_fetch_assoc']($request))
+					$boards[] = array(
+						'id' => $row['id_board'],
+						'num_posts' => $row['num_posts'],
+						'num_topics' => $row['num_topics'],
+						'name' => $row['name'],
+						'is_redirect' => $row['is_redirect'],
+						'href' => $scripturl . '?board=' . $row['id_board'] . '.0&action=kitsitemap;xml',
+					);
+				$smcFunc['db_free_result']($request);
+							
+				// set template
 				$context['sub_template'] = 'kitsitemap_xml_main';
 			}
 			else
