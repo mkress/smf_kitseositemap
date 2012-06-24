@@ -56,6 +56,17 @@ function kit_sitemap_load_theme()
 			$context['topics'] = array();
 			if ( $xmlView )
 			{
+				// get child boards
+				require_once($sourcedir . '/Subs-BoardIndex.php');
+				$boardIndexOptions = array(
+						'include_categories' => false,
+						'base_level' => $board_info['child_level'] + 1,
+						'parent_id' => $board_info['id'],
+						'set_latest_post' => false,
+						'countChildPosts' => false,
+				);
+				$context['boards'] = getBoardIndex($boardIndexOptions);
+				
 				$context['sub_template'] = 'kitsitemap_xml_board';
 				// maximum entries per sitemap
 				$context['topics_per_page'] = 50000;

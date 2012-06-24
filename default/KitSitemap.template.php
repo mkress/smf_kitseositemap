@@ -61,6 +61,20 @@ function template_kitsitemap_board()
 {
 	global $context;
 	
+	if (!empty($context['boards']))
+	{
+		echo '<ul>';
+		foreach($context['boards'] as $board)
+		{
+			if ($board['is_redirect'])
+			{
+				continue;
+			}
+			echo '<li><a href="' . $board['href'] . '&action=kitsitemap">' . $board['name'] . '</a></li>';
+		}
+		echo '</ul>';
+	}
+	
 	echo '<div id="paging">' . $context['page_index'] . '</div>';
 	// list topics
 	if (!empty($context['topics']))
