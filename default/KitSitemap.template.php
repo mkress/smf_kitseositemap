@@ -39,14 +39,13 @@ function template_kitsitemap_main()
 
 function template_kitsitemap_xml_main()
 {
-	global $boards;
+	global $context;
 		
-	
 	echo '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 	// display categories and boards
-	if (!empty($boards))
+	if (!empty($context['all_boards']))
 	{
-		foreach($boards as $board)
+		foreach($context['all_boards'] as $board)
 		{
 			if ($board['is_redirect'])
 			{

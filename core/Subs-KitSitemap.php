@@ -14,7 +14,7 @@ if (!defined('SMF'))
 	
 function kit_sitemap_load_theme()
 {
-	global $context, $sourcedir, $scripturl, $settings, $board_info, $boarddir, $modSettings, $smcFunc, $txt;
+	global $context, $sourcedir, $scripturl, $settings, $board_info, $modSettings, $smcFunc, $txt, $user_info;
 	
 	// load template
 	loadTemplate('KitSitemap');
@@ -140,7 +140,8 @@ function kit_sitemap_load_theme()
 						LEFT JOIN {db_prefix}log_boards AS lb ON (lb.id_board = b.id_board AND lb.id_member = {int:current_member})
 					WHERE {query_wanna_see_board}',
 					array(
-						'current_member' => $user_info['id']
+						'current_member' => $user_info['id'],
+						'blank_string' => '',
 					)
 				);
 				$boards = array();
@@ -153,6 +154,7 @@ function kit_sitemap_load_theme()
 						'is_redirect' => $row['is_redirect'],
 						'href' => $scripturl . '?board=' . $row['id_board'] . '.0&action=kitsitemap;xml',
 					);
+				$context['all_boards'] = $boards;
 				$smcFunc['db_free_result']($request);
 							
 				// set template
