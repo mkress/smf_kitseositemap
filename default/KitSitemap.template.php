@@ -47,7 +47,7 @@ function template_kitsitemap_xml_main()
 	{
 		foreach($context['all_boards'] as $board)
 		{
-			if ($board['is_redirect'])
+			if ( $board['is_redirect'] || empty($board['num_topics']) )
 			{
 				continue;
 			}
