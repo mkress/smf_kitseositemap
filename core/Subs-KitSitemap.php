@@ -19,19 +19,19 @@ function kit_sitemap_load_theme()
 	// load template
 	loadTemplate('KitSitemap');
 	
-	// Retrieve the categories and boards.
-	require_once($sourcedir . '/Subs-BoardIndex.php');
-	$boardIndexOptions = array(
-		'include_categories' => true,
-		'base_level' => 0,
-		'parent_id' => 0,
-		'set_latest_post' => false,
-		'countChildPosts' => false,
-	);
-	$context['categories'] = getBoardIndex($boardIndexOptions);
-	
 	if ($context['current_action'] == 'kitsitemap')
 	{	
+		// Retrieve the categories and boards.
+		require_once($sourcedir . '/Subs-BoardIndex.php');
+		$boardIndexOptions = array(
+				'include_categories' => true,
+				'base_level' => 0,
+				'parent_id' => 0,
+				'set_latest_post' => false,
+				'countChildPosts' => false,
+		);
+		$context['categories'] = getBoardIndex($boardIndexOptions);
+		
 		loadLanguage('KitSitemap');
 		
 		$xmlView = false;
@@ -189,6 +189,21 @@ function kit_sitemap_load_theme()
 		// add footer before body-layer
 		if (  $modSettings['kit_sitemap_footer'] == 1 || $modSettings['kit_sitemap_footer'] == 2 )
 		{
+			
+			if ( $modSettings['kit_sitemap_footer'] == 1 )
+			{
+				// Retrieve the categories and boards.
+				require_once($sourcedir . '/Subs-BoardIndex.php');
+				$boardIndexOptions = array(
+						'include_categories' => true,
+						'base_level' => 0,
+						'parent_id' => 0,
+						'set_latest_post' => false,
+						'countChildPosts' => false,
+				);
+				$context['categories'] = getBoardIndex($boardIndexOptions);
+			}
+			
 			$context['template_layers'][] = 'kitsitemap_footer';
 		}
 	}
